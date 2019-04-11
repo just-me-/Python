@@ -4,6 +4,14 @@
 # -----------------------------------------------------------------------------
 class QuizRangliste():
 
+    def __extract_file_data(self, file):
+        for zeile in file:
+            elemente = zeile.strip().split(',')
+            # array of array... or would be an array of object better? 2Do
+            self.__file_data.append(elemente)
+            # 2Do:
+            # Leere oder ungültige Zeilen werden ignoriert.
+
     def __init__(self, datei='default.txt'):
         '''Initialisiert der Rangliste.
         List die Daten aus der angegebenen Textdatei (encoding='utf-8') aus
@@ -17,11 +25,22 @@ class QuizRangliste():
         Argumente:
             type(datei) == str -- Pfad zur Textdatei mit den Ranglistendaten.
         '''
-        with open(datei, 'w+', encoding='utf-8') as file:
-            for zeile in file:
-                zeile = zeile.strip()
-                elemente = zeile.split(',')
-                print(elemente)
+        self.__file_data = []
+
+        # "with" closes files implicitly
+        try:
+            # file exists - open for reading
+            with open(datei, 'r', encoding='utf-8') as file:
+                self.__extract_file_data(file)
+        except:
+            # file not exists - create it (w+ wipes file so I need 2 exceptions...)
+            try:
+                with open(datei, 'w+', encoding='utf-8') as file:
+                    self.__extract_file_data(file)
+            except:
+                print("Fehlende Berechtigung auf dem Dateisystem!")
+
+        print(self.__file_data);
 
     def als_dictionary(self):
         '''
