@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------------------
 class QuizRangliste():
 
-    def __init__(datei):
+    def __init__(self, datei='default.txt'):
         '''Initialisiert der Rangliste.
         List die Daten aus der angegebenen Textdatei (encoding='utf-8') aus
         und bereitet diese zur Abfrage vor.
@@ -17,10 +17,13 @@ class QuizRangliste():
         Argumente:
             type(datei) == str -- Pfad zur Textdatei mit den Ranglistendaten.
         '''
-        # ...
-        pass
+        with open(datei, 'w+', encoding='utf-8') as file:
+            for zeile in file:
+                zeile = zeile.strip()
+                elemente = zeile.split(',')
+                print(elemente)
 
-    def als_dictionary():
+    def als_dictionary(self):
         '''
         Gibt die iDaten als Dictionary von Dictionaries zurück:
             Key = name, Value = {’Punkte’: punkte, ’Zeit’: zeit}
@@ -33,7 +36,7 @@ class QuizRangliste():
         # ...
         pass
 
-    def als_liste():
+    def als_liste(self):
         '''
         Gibt eine Liste von Tupeln (name, punkte, zeit) zurück.
             Key = name, Value = {’Punkte’: punkte, ’Zeit’: zeit}
@@ -51,7 +54,7 @@ class QuizRangliste():
         # ...
         pass
 
-    def als_string():
+    def als_string(self):
         '''
         Gibt die Daten als formatierten String zurück.
 
@@ -74,7 +77,7 @@ class QuizRangliste():
         # ...
         pass
 
-    def resultat_addieren(name, punkte, zeit):
+    def resultat_addieren(self, name, punkte, zeit):
         '''
         Fügt einer Person (name) weitere Punkte und Zeit hinzu.
 
@@ -94,7 +97,7 @@ class QuizRangliste():
         # ...
         pass
 
-    def name_entfernen(name):
+    def name_entfernen(self, name):
         '''
         Löscht den die Person (name ink punkte und zeit) von der Liste.
         Falls die angegebene Person (name) nicht in der Liste ist, passiert nichts.
@@ -109,7 +112,7 @@ class QuizRangliste():
         # ...
         pass
 
-    def speichern(als=None):
+    def speichern(self, als=None):
         '''
         Schreibt die Daten als Kommagetrennte Werte in die ursprüngliche Textdatei.
         Falls das Argument als angegeben wird:
@@ -128,18 +131,18 @@ class QuizRangliste():
 if __name__ == '__main__':
     qr = QuizRangliste(datei='rangliste.txt')
 
-    d = qr.als dictionary()
+    d = qr.als_dictionary()
     print(d)
     #{’Noemi’: {’Punkte’: 7, ’Zeit’: 40.0}, ’Max’: {’Punkte’: 6, ’Zeit’: 100.02},
     #’Hans’: {’Punkte’: 2, ’Zeit’: 45.24}, ’Anna’: {’Punkte’: 5, ’Zeit’: 20.55},
     #’Fritz’: {’Punkte’: 5, ’Zeit’: 39.3}, ’Laura’: {’Punkte’: 5, ’Zeit’: 20.55}}
 
-    lst = qr.als liste()
+    lst = qr.als_liste()
     print(lst)
     #[(’Noemi’, 7, 40.0), (’Max’, 6, 100.02), (’Anna’, 5, 20.55),
     #(’Laura’, 5, 20.55), (’Fritz’, 5, 39.3), (’Hans’, 2, 45.24)]
 
-    s = qr.als string()
+    s = qr.als_string()
     print(s)
     # Noemi | 7 | 40.0
     # Max   | 6 | 100.0
@@ -148,9 +151,9 @@ if __name__ == '__main__':
     # Fritz | 5 | 39.3
     # Hans  | 2 | 45.2
 
-    qr.resultat addieren(name=’Noemi’, punkte=7, zeit=50.4)
-    qr.resultat addieren(name=’Noemi’, punkte=’7’, zeit=’50.4’)
-    print(qr.als string())
+    qr.resultat_addieren(name='Noemi', punkte=7, zeit=50.4)
+    qr.resultat_addieren(name='Noemi', punkte='7', zeit='50.4')
+    print(qr.als_string())
     # Noemi | 21 | 140.8
     # Max   |  6 | 100.0
     # Anna  |  5 | 20.6
@@ -158,8 +161,8 @@ if __name__ == '__main__':
     # Fritz |  5 | 39.3
     # Hans  |  2 | 45.2
 
-    qr.name entfernen(name=’Fritz’)
-    print(qr.als string())
+    qr.name_entfernen(name='Fritz')
+    print(qr.als_string())
     # Noemi | 21 | 140.8
     # Max   |  6 | 100.0
     # Anna  |  5 | 20.6
@@ -167,6 +170,6 @@ if __name__ == '__main__':
     # Hans  |  2 | 45.2
 
     qr.speichern()
-    qr.speichern(als=’neue rangliste.txt’)
+    qr.speichern(als='neue rangliste.txt')
 
     # help(QuizRangliste)
