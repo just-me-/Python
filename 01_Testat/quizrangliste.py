@@ -32,7 +32,7 @@ class QuizRangliste():
             # file exists - open for reading
             with open(datei, 'r', encoding='utf-8') as file:
                 self.__extract_file_data(file)
-        except FileNotFoundError:
+        except:
             # file not exists - create it (w+ wipes file so I need 2 exceptions...)
             try:
                 with open(datei, 'w+', encoding='utf-8') as file:
