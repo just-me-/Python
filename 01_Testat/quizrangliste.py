@@ -15,8 +15,8 @@ class QuizRangliste():
                     continue
                 elemente = zeile.strip().split(',')
                 self.__file_data[elemente[0]] = {
-                    'punkte': int(elemente[1]),
-                    'zeit': float(elemente[2])
+                    'Punkte': int(elemente[1]),
+                    'Zeit': float(elemente[2])
                 }
             except Exception:
                 continue
@@ -92,7 +92,7 @@ class QuizRangliste():
         '''
         arr = []
         for key, value in self.__file_data.items():
-            arr.append((key, value['punkte'], value['zeit']))
+            arr.append((key, value['Punkte'], value['Zeit']))
         return sorted(arr, key=lambda x: (-x[1], x[2], x[0]))
 
     def als_string(self):
@@ -123,11 +123,11 @@ class QuizRangliste():
         if(len(arr) > 0):
             name_len = max([len(x) for x in self.__file_data])
             punkte_len = max(
-                [len(str(self.__file_data[x]['punkte']))
+                [len(str(self.__file_data[x]['Punkte']))
                     for x in self.__file_data]
             )
             zeit_len = max(
-                [len(str(round(self.__file_data[x]['zeit'], 1)))
+                [len(str(round(self.__file_data[x]['Zeit'], 1)))
                     for x in self.__file_data]
             )
 
@@ -164,10 +164,10 @@ class QuizRangliste():
             return False
 
         if name in self.__file_data:
-            self.__file_data[name]['punkte'] += punkte
-            self.__file_data[name]['zeit'] += zeit
+            self.__file_data[name]['Punkte'] += punkte
+            self.__file_data[name]['Zeit'] += zeit
         else:
-            self.__file_data[name] = {'punkte': punkte, 'zeit': zeit}
+            self.__file_data[name] = {'Punkte': punkte, 'Zeit': zeit}
 
         return True
 
