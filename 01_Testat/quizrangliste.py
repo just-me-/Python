@@ -15,8 +15,8 @@ class QuizRangliste():
                     continue
                 elemente = zeile.strip().split(',')
                 self.__file_data[elemente[0]] = {
-                    'Punkte': int(elemente[1]),
-                    'Zeit': float(elemente[2])
+                    'Punkte': elemente[1] and int(elemente[1]) or 0,
+                    'Zeit': elemente[2] and float(elemente[2]) or 0
                 }
             except Exception:
                 continue
