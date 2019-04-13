@@ -9,15 +9,29 @@ class QuizRangliste():
 
     def __extract_file_data(self, file):
         for zeile in file:
-            # Leere oder ungültige Zeilen werden ignoriert.
-            if re.match(r'\w+,.*,.*$', zeile.strip()) is None:
+            try:
+                # Leere oder ungültige Zeilen werden ignoriert.
+                if re.match(r'\w+,.*,.*$', zeile.strip()) is None:
+                    continue
+                elemente = zeile.strip().split(',')
+                self.__file_data[elemente[0]] = {
+                    'punkte': int(elemente[1]),
+                    'zeit': float(elemente[2])
+                }
+            except Exception:
                 continue
-            elemente = zeile.strip().split(',')
-            self.__file_data.append({
-                'name': elemente[0],
-                'punkte': int(elemente[1]),
-                'zeit': float(elemente[2])
-            })
+
+    def __write_data_to_file(self, file):
+        try:
+            with open(file, 'w+', encoding='utf-8') as file:
+                for line in self.als_liste():
+                    file.write(
+                        line[0] + ',' +
+                        str(line[1]) + ',' +
+                        str(round(line[2], 1)) + '\n'
+                    )
+        except Exception:
+            print("Fehlende Berechtigung auf dem Dateisystem!")
 
     def __init__(self, datei='default.txt'):
         '''
@@ -33,7 +47,8 @@ class QuizRangliste():
         Argumente:
             datei: string -- Pfad zur Textdatei mit den Ranglistendaten.
         '''
-        self.__file_data = []
+        self.__file_data = {}
+        self.__file_name = datei
 
         # "with" closes files implicitly
         try:
@@ -58,8 +73,7 @@ class QuizRangliste():
             punkte: int,
             zeit: float
         '''
-        # ...
-        pass
+        return self.__file_data
 
     def als_liste(self):
         '''
@@ -76,8 +90,10 @@ class QuizRangliste():
             2. Zeit, aufsteigend
             3. Name, alphabetisch aufsteigend: A=>Z
         '''
-        # ...
-        pass
+        arr = []
+        for key, value in self.__file_data.items():
+            arr.append((key, value['punkte'], value['zeit']))
+        return sorted(arr, key=lambda x: (-x[1], x[2], x[0]))
 
     def als_string(self):
         '''
@@ -101,8 +117,25 @@ class QuizRangliste():
             2. Zeit, aufsteigend
             3. Name, alphabetisch aufsteigend: A=>Z
         '''
-        # ...
-        pass
+        string = ''
+        arr = self.als_liste()
+
+        if(len(arr) > 0):
+            name_len = max([len(x) for x in self.__file_data])
+            punkte_len = max(
+                [len(str(self.__file_data[x]['punkte']))
+                    for x in self.__file_data]
+            )
+            zeit_len = max(
+                [len(str(round(self.__file_data[x]['zeit'], 1)))
+                    for x in self.__file_data]
+            )
+
+            for line in arr:
+                string += line[0].ljust(name_len, ' ') + ' | '
+                string += str(line[1]).rjust(punkte_len, ' ') + ' | '
+                string += str(round(line[2], 1)).rjust(zeit_len, ' ') + '\n'
+        return string
 
     def resultat_addieren(self, name, punkte, zeit):
         '''
@@ -121,8 +154,22 @@ class QuizRangliste():
             False: Boolean - bei ungültigen Argumenten,
             True: Boolean -  falls fehlerfrei.
         '''
-        # ...
-        pass
+        if ',' in name:
+            return False
+        try:
+            name = str(name)
+            punkte = int(punkte)
+            zeit = float(zeit)
+        except Exception:
+            return False
+
+        if name in self.__file_data:
+            self.__file_data[name]['punkte'] += punkte
+            self.__file_data[name]['zeit'] += zeit
+        else:
+            self.__file_data[name] = {'punkte': punkte, 'zeit': zeit}
+
+        return True
 
     def name_entfernen(self, name):
         '''
@@ -133,8 +180,8 @@ class QuizRangliste():
         Argumente:
             name: string
         '''
-        # ...
-        pass
+        if name in self.__file_data:
+            del self.__file_data[name]
 
     def speichern(self, als=None):
         '''
@@ -152,8 +199,9 @@ class QuizRangliste():
             2. Zeit, aufsteigend
             3. Name, alphabetisch aufsteigend: A=>Z
         '''
-        # ...
-        pass
+        if als is None:
+            als = self.__file_name
+        self.__write_data_to_file(als, )
 
 
 # --- Test --------------------------------------------------------------------
