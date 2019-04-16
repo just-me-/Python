@@ -1,0 +1,10 @@
+Noemi,7,40.0
+Max,6,100.02
+Anna,5,20.55
+Laura,5,20.55
+ASFDASSDFAASGDASGD Saöööööhne
+
+
+
+Fritz,5,39.3
+Hans,2,45.24
