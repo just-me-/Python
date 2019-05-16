@@ -1,0 +1,31 @@
+Deine Lösung zur Testat-Aufgabe hat folgende Punkte erhalten:
+
+1P, Klasse: Nur die unten aufgelisteten Methoden dürfen public sein.
+1P, Klasse: Es gibt keine public Instanzvariablen.
+4P, Klasse: Klasse und Methoden besitzen aussagekräftige Docstrings.
+6P, Klasse: Python-Codestil entspricht den PEP8-Empfehlungen.
+1P, __init__(): Angegebene Textdatei (encoding='utf-8') einlesen.
+1P, __init__(): Leere oder ungültige Zeilen werden ignoriert.
+1P, __init__(): Erstellt leere Datei, falls nicht vorhanden.
+1P, als_dictionary(): Gibt die Daten als Dictionary zurück.
+1P, als_dictionary(): Die Datentypen sind: str, int, float.
+1P, als_liste(): Gibt Liste von Tupeln (name, punkte, zeit) zurück.
+1P, als_liste(): Die Datentypen sind: str, int, float.
+3P, als_liste(): Sortierung ist: Punkte (ab), Zeit (auf), Name (A-Z).
+1P, als_string(): Gibt die Daten als formatierten String zurück.
+1P, als_string(): Zeilenformat ist: Name | Punkte | Zeit
+2P, als_string(): Gleiche Spaltenbreite und Ausrichtung stimmt.
+1P, als_string(): Die Sortierung stimmt: Punkte, Zeit, Name.
+1P, resultat_addieren(): Falls Name existiert, Daten hinzuaddieren.
+1P, resultat_addieren(): Falls Name nicht existiert: Namen anlegen.
+1P, resultat_addieren(): Name darf keine Kommazeichen enthalten.
+1P, resultat_addieren(): Die Datentypen sind str, int/str, float/str.
+1P, resultat_addieren(): Rückgabewert=False bei Fehlern, True sonst.
+1P, name_entfernen(): Falls Name existiert: Name löschen.
+1P, name_entfernen(): Falls Name nicht existiert: nichts tun.
+1P, speichern(): Komma-getrennte Werte in die ursprüngliche Datei.
+1P, speichern(): Komma-getrennte Werte in die angegebene Datei.
+1P, speichern(): Die Sortierung stimmt: Punkte, Zeit, Name.
+1P, speichern(): Die Datei wird mit encoding='utf-8' geschrieben.
+
+Total Punkte: 38 (von 38)
