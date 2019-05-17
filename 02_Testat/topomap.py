@@ -3,7 +3,10 @@
 
 
 class TopoMap():
-    '''Liest Höhendaten aus einer Textdatei ein. Bereitet Informationen für Sportler auf.'''
+    '''
+        Liest Höhendaten aus einer Textdatei ein.
+        Bereitet Informationen für Sportler auf.
+    '''
 
     def __init__(self, fname='map_data.txt'):
         '''
@@ -66,10 +69,13 @@ class TopoMap():
         '''
         pass
 
-    def fall_line(self, start, descent=True, gamma=50, max_iter=10000, precision=0.1):
+    def fall_line(
+            self, start, descent=True, gamma=50,
+            max_iter=10000, precision=0.1):
         '''
         Liefert die Fallinie eines Hanges.
-        Mit descent=False kann die Richtung gekehrt werden (bergauf statt bergab steigen)
+        Mit descent=False kann die Richtung gekehrt werden
+        (bergauf statt bergab steigen)
         Rückgabe des Pfads als 2D NumPy Array.
         '''
         pass
