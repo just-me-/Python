@@ -101,5 +101,5 @@ if __name__ == '__main__':
     print('Hellöw')
     tmap = TopoMap()
     print(tmap.X)
-    tmap.X = 3
+    # tmap.X = 3
     # AttributeError: can’t set attribute
